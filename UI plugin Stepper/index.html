@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Vue js | Курсовая 1</title>
+	
+	<link rel="stylesheet" href="main.css">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
+</head>
+<body>
+
+	<main id="app" v-cloak>
+		<div class="container" ref="container">
+			<div class="white-box">
+				<h1 style="margin-top: 0;margin-bottom: 20px;">План по изучению Vue.js</h1>
+				<div class="content-text">{{ compCurrentStep.text }}</div>
+				<div class="content-steps">
+					<div class="step" v-for="(step, idx) in steps" :key="step.title">
+						<div 
+							class="step-number" 
+							:class="{ active: idx <= activeStepIdx, 'text-dark': idx < activeStepIdx }"
+							@click="setActive(idx)"
+						>{{ idx +1 }}</div>
+						<div class="step-name">{{ step.title }}</div>
+					</div>
+				</div>
+				<div class="content-buttons" v-if="!isFinish">
+					<button 
+						class="btn bg-green" 
+						@click="getBack"
+						:disabled="!activeStepIdx"
+					>Назад</button>
+					<button 
+						class="btn bg-blue" 
+						@click="nextOfFinish" 
+						v-text="compLastStep ? 'Закончить' : 'Вперед'"
+					></button>
+					
+					<div 
+						class="wow animate__animated animate__bounceInRight" 
+						:style="{ display: activeStepIdx == (steps.length -1) ? 'inline-block' : 'none' }"
+						@click="kekw"
+					></div>
+				</div>
+				<div class="content-buttons" v-else>
+					<button class="btn bg-blue" @click="activeStepIdx = 0, isFinish = false">Начать заново</button>
+				</div>
+			</div>
+		</div>
+	</main>
+
+	<script src="https://unpkg.com/vue@next"></script>
+	<script src="main.js"></script>
+</body>
+</html>
