@@ -24,6 +24,7 @@ const App = {
 		reset() {
 			// начать заново
 			this.activeStepIdx = 0
+			this.isFinish = false
 		},
 		nextOfFinish() {
 			// кнопка вперед или закончить
@@ -47,7 +48,7 @@ const App = {
 			return this.steps[this.activeStepIdx]
 		},
 		compLastStep() {
-			return this.activeStepIdx === (this.steps.length -1) ? true : false
+			return this.activeStepIdx === (this.steps.length -1)
 		}
 
 	}
