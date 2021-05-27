@@ -1,0 +1,70 @@
+.weather {
+	display: flex;
+	flex-wrap: wrap;
+	align-items: center;
+	justify-content: center;
+}
+.weaher-icon {
+	width: 200px;
+	height: 200px;
+
+	img, svg {
+		display: block;
+		width: 100%;
+	}
+}
+.weather-temp {
+	display: flex;
+	
+	font-size: 180px;
+	line-height: 216px;
+	text-align: center;
+	color: var(--white-color);
+
+	margin-left: 30px;
+}
+.weather-about {
+	font-size: 25px;
+	line-height: 30px;
+	text-align: center;
+	color: var(--white-color);
+
+	margin-top: 10px;
+
+	// первая бука заглавная
+	&:first-letter {text-transform: uppercase;}
+}
+
+@media screen and (max-width: $bk-lg) {
+	.weaher-icon {
+		width: 150px;
+		height: 150px;
+	}
+}
+@media screen and (max-width: $bk-md) {
+	.weaher-icon {
+		width: 120px;
+		height: 120px;
+	}
+	.weather-temp {
+		font-size: 120px;
+		line-height: normal
+	}
+	.weather-about {
+		line-height: normal;
+		margin-bottom: 0;
+	}
+}
+
+@media screen and (max-width: $bk-sm) {
+	.weaher-icon {
+		width: 60px;
+		height: 60px;
+	}
+	.weather-temp {
+		font-size: 80px;
+	}
+	.weather-about {
+		font-size: 18px;
+	}
+}

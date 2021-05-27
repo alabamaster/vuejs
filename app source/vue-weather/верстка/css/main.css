@@ -1,0 +1,251 @@
+@charset "UTF-8";
+@font-face {
+  font-family: Lato;
+  src: url(../fonts/Lato-Regular.ttf);
+}
+
+:root {
+  --white-color: #fff;
+  --secondary-color: rgba(255, 255, 255, .6);
+  --blue-color: #498CEC;
+}
+
+:root[theme="dark"] {
+  --white-color: #fff;
+  --secondary-color: rgba(255, 255, 255, .6);
+  --blue-color: #498CEC;
+}
+
+body {
+  font-family: Lato;
+  color: #fff;
+  background-color: var(--blue-color);
+  height: 100vh;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -ms-flex-pack: distribute;
+      justify-content: space-around;
+}
+
+.container {
+  max-width: 1180px;
+  padding: 0 20px;
+  margin: 0 auto;
+}
+
+.btn {
+  border: 0;
+  background-color: transparent;
+  padding: 0;
+  cursor: pointer;
+}
+
+.wrap-header {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: start;
+      -ms-flex-align: start;
+          align-items: flex-start;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+}
+
+.city.hide {
+  display: none;
+}
+
+.city-search {
+  display: none;
+  width: 580px;
+  height: 98px;
+  background: var(--white-color);
+  -webkit-box-shadow: 0px 2px 8px rgba(0, 0, 0, 0.15);
+          box-shadow: 0px 2px 8px rgba(0, 0, 0, 0.15);
+  border-radius: 8px;
+}
+
+.city-search.show {
+  display: -webkit-box !important;
+  display: -ms-flexbox !important;
+  display: flex !important;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  overflow: hidden;
+}
+
+.city-search_input {
+  -webkit-box-flex: 1;
+      -ms-flex: 1 0 0px;
+          flex: 1 0 0;
+  padding: 0;
+  border-width: 0;
+  padding-left: 32px;
+  font-size: 30px;
+  line-height: 36px;
+  color: #000000;
+}
+
+.city-search_input:focus {
+  outline: none;
+}
+
+.city-search_btn {
+  padding: 0 30px;
+  border: 0;
+  background-color: transparent;
+  font-size: 30px;
+  line-height: 36px;
+  color: #1086FF;
+  cursor: pointer;
+  height: -webkit-max-content;
+  height: -moz-max-content;
+  height: max-content;
+}
+
+.city-search_btn:focus {
+  outline: none;
+}
+
+#wrap-city.hide {
+  display: none;
+}
+
+.current-city {
+  font-size: 50px;
+  line-height: 60px;
+  color: var(--white-color);
+  margin-bottom: 10px;
+}
+
+.city-buttons_btn {
+  display: inline-block;
+  font-size: 18px;
+  line-height: 22px;
+  color: var(--secondary-color);
+}
+
+.city-buttons_btn:first-child {
+  margin-right: 30px;
+}
+
+.city-buttons_btn img {
+  vertical-align: middle;
+}
+
+.wrap-metric {
+  position: relative;
+}
+
+.wrap-metric:before {
+  position: absolute;
+  top: 6px;
+  left: -15px;
+  content: 'º';
+  font-size: 18px;
+  line-height: 22px;
+  color: var(--secondary-color);
+}
+
+.metric {
+  overflow: hidden;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  border: 1px solid var(--secondary-color);
+  border-radius: 8px;
+}
+
+.metric_btn {
+  font-size: 18px;
+  line-height: 22px;
+  color: var(--secondary-color);
+  width: 38px;
+  height: 30px;
+}
+
+.metric_btn.active {
+  color: var(--white-color) !important;
+  background-color: rgba(255, 255, 255, 0.2);
+}
+
+.weather {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+}
+
+.weaher-icon {
+  width: 200px;
+  height: 200px;
+}
+
+.weaher-icon img {
+  display: block;
+  width: 100%;
+}
+
+.weather-temp {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  font-size: 180px;
+  line-height: 216px;
+  text-align: center;
+  color: var(--white-color);
+  margin-left: 30px;
+}
+
+.weather-about {
+  font-size: 25px;
+  line-height: 30px;
+  text-align: center;
+  color: var(--white-color);
+}
+
+.statistic-list {
+  padding: 0;
+  margin: 0;
+  list-style: none;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+}
+
+.statistic-item {
+  display: block;
+}
+
+.item-title {
+  font-size: 18px;
+  line-height: 22px;
+  color: var(--secondary-color);
+}
+
+.item-value {
+  font-size: 25px;
+  line-height: 30px;
+  color: var(--white-color);
+  margin-top: 10px;
+}
