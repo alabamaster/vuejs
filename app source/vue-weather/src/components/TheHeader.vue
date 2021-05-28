@@ -98,24 +98,9 @@ export default {
 		submitSearch() {
 			this.showSearchResults = true
 
-			this.searchResultArr.forEach((item, idx) => {
-				if (item.search(this.searchQuery) === -1) {
-					this.searchResultArr.splice(idx, 1)
-				}
-			})
-			
-			this.cityList.forEach((item, idx) => {
-				if (item.search(this.searchQuery) > -1) {
-					this.searchResultArr.push(item)
-				} else {
-					this.searchResultArr.splice(idx, 1)
-				}
-			})
 
-			// удаление дублей из массива
-			this.searchResultArr = this.searchResultArr.filter((item, idx) => {
-				return this.searchResultArr.indexOf(item) === idx
-			})
+			this.searchResultArr = this.cityList.
+				filter(item => item.toLowerCase().indexOf(this.searchQuery.toLowerCase()) !== -1)
 		},
 		goSearch(city) {
 			this.$emit('change-current-city', city)
