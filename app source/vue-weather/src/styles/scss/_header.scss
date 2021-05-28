@@ -3,38 +3,38 @@
 	align-items: flex-start;
 	justify-content: space-between;
 }
-.city {
-	&.hide {
-		display: none;
-	}
+.wrap-city {
+	&.hide {display: none;}
 }
+.city {}
 .wrap-search {
-	position: relative;
-}
-.city-search {
 	display: none;
 
-	width: 580px;
-	height: 100px;
-
-	background: var(--white-color);
-	box-shadow: 0px 2px 8px rgba(0, 0, 0, 0.15);
-	border-radius: 8px;
-
 	&.show {
-		display: flex !important;
-		align-items: center;
-		justify-content: space-between;
-    	overflow: hidden;
+		display: block;
+		position: relative;
 	}
-	&_input {
-		flex: 1 0 0;
-		height: 100%;
+}
+.city-search {
+	display: flex;
+	align-items: center;
 
-		padding: 0;
+	height: 100px;
+	width: 580px;
+
+	border-radius: 8px;
+	background-color: var(--white-color);
+	box-shadow: 0px 2px 8px rgba(0, 0, 0, 0.15);
+
+	&_form {}
+	&_input {
 		border-width: 0;
-		padding-left: 32px;
+		border-radius: inherit;
+		padding: 0 32px;
 		background-color: var(--white-color);
+
+		height: 100%;
+		flex: 1 0 0;
 
 		font-size: 30px;
 		line-height: 36px;
@@ -43,9 +43,10 @@
 		&:focus {outline: none;}
 	}
 	&_btn {
-		padding: 0 30px;
 		border: 0;
-		background-color: transparent;
+		background: transparent;
+		padding-right: 32px;
+		padding-left: 0;
 
 		font-size: 30px;
 		line-height: 36px;
@@ -58,44 +59,36 @@
 	}
 }
 .search-list {
-	border-radius: 8px;
-	max-height: 400px;
-	overflow: auto;
 	position: absolute;
 	width: 100%;
-	left: 0;
+	background: var(--white-color);
+	border-radius: 8px;
 	margin-top: 10px;
-	
-	& .search-item {
-		font-size: 24px;
-		line-height: 36px;
+	z-index: 1;
+	overflow: auto;
+	height: 30vw;
+
+	.search-item {
 		color: #000000;
-		border-radius: 8px;
-		transition: all .3s;
-		padding: 5px 15px;
-		background: var(--white-color);
-		margin-bottom: 10px;
+		font-size: 22px;
+		padding: 10px 32px;
+		cursor: pointer;
+		width: max-content;
 
 		&:hover {
-			cursor: pointer;
-			background: #e0e0e0;
+			color: var(--blue-color);
 		}
 	}
 }
 
-#wrap-city {
-	&.hide {
-		display: none;
-	}
-}
 .current-city {
 	font-size: 50px;
 	line-height: 60px;
 	color: var(--white-color);
-
-	margin-bottom: 10px;
 }
 .city-buttons {
+	margin-top: 10px;
+
 	&_btn {
 		display: inline-block;
 
@@ -108,7 +101,6 @@
 		& svg {display: none;}
 	}
 }
-
 .wrap-metric {
 	position: relative;
 
@@ -147,59 +139,58 @@
 	}
 }
 
-@media screen and (max-width: $bk-lg)  {
-	.city {
-		width: 100%;
-	}
-	.city-search {
-		width: 100%;
-		flex: 0 0 100%;
-	}
+@media screen and (max-width: $bk-lg) {
 	.wrap-metric {
 		position: absolute;
-		bottom: 20px;
+		bottom: 15px;
 		right: 20px;
 	}
-}
-@media screen and (max-width: $bk-md) {
-	.wrap-header {
-		display: block;
+
+	.city, .city-search {
+		width: 100%;
 	}
+
+	.city-search_btn {padding-right: 20px;}
+	.city-search_input {padding: 0 20px;}
+}
+
+@media screen and (max-width: $bk-md) {
 	.city-search {
 		height: 60px;
 
-		&.show {
-			// justify-content: space-evenly;
-			width: calc(100% - 40px);
-			padding: 0 20px;
-		}
-		&_input {
-			padding-left: 0;
-			flex: unset;
-			width: 70%;
-
-			font-size: 24px;
-		}
-		&_btn {
-			padding: 0;
-			font-size: 24px;
-		}
-	}
-	.search-list {
-		.search-item {
+		&_input, &_btn {
 			font-size: 22px;
-			line-height: normal;
-			padding: 5px 20px 4px;
+		}
+	}
+}
+
+@media screen and (max-width: $bk-sm) {
+	// поиск
+	.city-search {
+		height: 60px;
+
+		padding: 0 20px;
+		width: calc(100% - 40px);
+		justify-content: space-between;
+
+		&_input {
+			width: 100%;
+			flex: unset;
+		}
+		&_input, &_btn {
+			font-size: 22px;
+			padding: 0;
 		}
 	}
 
-
+	// назвагие города
 	.current-city {
 		font-size: 40px;
-		line-height: normal;
-
-		margin-bottom: 0;
 	}
+}
+
+@media screen and (max-width: 420px) {
+	// кнопки поиска и моей локации
 	.city-buttons {
 		position: absolute;
 		top: 12%;
@@ -215,7 +206,7 @@
 			align-items: center;
 
 			border: 1px solid var(--secondary-color);
-    		border-radius: 8px;
+			border-radius: 8px;
 
 			&:first-child {
 				padding: 6px;

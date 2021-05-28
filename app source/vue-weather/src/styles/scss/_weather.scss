@@ -8,10 +8,11 @@
 	width: 200px;
 	height: 200px;
 
-	img, svg {
-		display: block;
-		width: 100%;
-	}
+	display: flex;
+	align-items: center;
+	justify-content: center;
+
+	& .bi {font-size: 140px;}
 }
 .weather-temp {
 	display: flex;
@@ -39,12 +40,16 @@
 	.weaher-icon {
 		width: 150px;
 		height: 150px;
+
+		& .bi {font-size: 120px;}
 	}
 }
 @media screen and (max-width: $bk-md) {
 	.weaher-icon {
 		width: 120px;
 		height: 120px;
+
+		& .bi {font-size: 100px;}
 	}
 	.weather-temp {
 		font-size: 120px;
@@ -58,8 +63,10 @@
 
 @media screen and (max-width: $bk-sm) {
 	.weaher-icon {
-		width: 60px;
-		height: 60px;
+		width: 70px;
+		height: 70px;
+
+		& .bi {font-size: 60px;}
 	}
 	.weather-temp {
 		font-size: 80px;
@@ -67,4 +74,9 @@
 	.weather-about {
 		font-size: 18px;
 	}
+}
+
+@media screen and (max-width: 320px) {
+	.weather-about {margin-top: 0;}
+	.item-value {margin-top: 5px;}
 }

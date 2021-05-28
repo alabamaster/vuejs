@@ -3,31 +3,32 @@
 		<div class="container">
 			<div class="wrap-header">
 				<div class="city">
-					<div class="wrap-search">
-						<form id="search-city-form" @submit.prevent="goSearch(searchQuery)">
-							<div class="city-search" :class="{show: searchIsActive}">
+					<div class="wrap-search" :class="{show: searchIsActive}">
+						<form class="city-search_form" @submit.prevent="goSearch(searchQuery)">
+							<div class="city-search">
 								<input 
 									type="text" 
 									placeholder="Введите город" 
 									class="city-search_input" 
 									@input="submitSearch"
 									v-model="searchQuery"
+									@keyup.esc="searchIsActive = !searchIsActive"
 								>
 								<button type="submit" class="city-search_btn">ОК</button>
 							</div>
 						</form>
 
-						<div class="search-list" v-if="showSearchResults && searchQuery.length > 0">
+						<div class="search-list" v-if="showSearchResults && searchQuery.length > 1">
 							<div 
 								class="search-item" 
-								v-for="item in searchResultArr" 
-								:key="item"
+								v-for="(item, idx) in searchResultArr" 
+								:key="idx"
 								@click="selectNewCity(item)"
 							>{{ item }}</div>
 						</div>
 					</div>
 					
-					<div id="wrap-city" :class="{hide: searchIsActive}">
+					<div class="wrap-city" :class="{hide: searchIsActive}">
 						<div class="current-city">{{ currentCity }}</div>
 						<div class="city-buttons">
 							<button class="btn city-buttons_btn" @click.prevent="toggleSearchActive">
@@ -95,14 +96,16 @@ export default {
 		},
 
 		// search, input event
-		submitSearch() {
+		submitSearch(e) {
 			this.showSearchResults = true
 
-
-			this.searchResultArr = this.cityList.
-				filter(item => item.toLowerCase().indexOf(this.searchQuery.toLowerCase()) !== -1)
+			this.searchResultArr = this.cityList
+				.filter(item => item.toLowerCase().indexOf(this.searchQuery.toLowerCase()) !== -1)
 		},
 		goSearch(city) {
+
+			if (!this.searchQuery.length) return this.toggleSearchActive()
+
 			this.$emit('change-current-city', city)
 			this.toggleSearchActive()
 			this.showSearchResults = false

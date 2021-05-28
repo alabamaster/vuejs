@@ -1,6 +1,6 @@
 <template>
    <the-header 
-		:city-list="cityList"
+		:city-list="computedCityList"
 		:unit="currentUnit" 
 		:current-city="currentCity"
 		@get-weather="getWeather"
@@ -11,6 +11,7 @@
 		:temp="currentWeather.temp" 
 		:about="currentWeather.about"
 		:icon="currentWeather.icon"
+		:icon-group-id="currentWeather.iconGroupId"
 		:sunrise="currentWeather.sunrise"
 		:sunset="currentWeather.sunset"
 	></the-weather>
@@ -53,6 +54,7 @@ export default {
 	},
 	mounted() {
 		this.cloudflare(),
+		this.getCitys(),
 
 		// мдэ -__-
 		setTimeout(() => {
@@ -60,6 +62,14 @@ export default {
 		}, this.INTERVAL_UPDATE)
 	},
 	methods: {
+		async getCitys() {
+			const response = await fetch('https://raw.githubusercontent.com/stepanovmax/towns-russia/master/towns-russia.json')
+			const data = await response.json()
+
+			data.forEach(itemA => {
+				itemA.localities.forEach(itemB => itemB.type === 'city' ? this.cityList.push(itemB.label) : 0)
+			})
+		},
 		async cloudflare() {
 			const response = await fetch('https://www.cloudflare.com/cdn-cgi/trace')
 			const data = await response.text()
@@ -95,8 +105,7 @@ export default {
 				if (response.status === 404 || !response.ok) {
 					alert('Упс... Кажется вы ошиблись в названии города')
 					this.animationLoadingData()
-					this.currentCity = this.cityList[0]
-					return
+					return this.currentCity = this.cityList[0]
 				}
 
 				const data = await response.json()
@@ -106,6 +115,7 @@ export default {
 					temp: data.list[0].main.temp,
 					about: data.list[0].weather[0].description,
 					icon: data.list[0].weather[0].icon,
+					iconGroupId: data.list[0].weather.id,
 					wind: data.list[0].wind,
 					rain: data.list[0].rain,
 					pressure: data.list[0].main.pressure, // давление
@@ -113,6 +123,8 @@ export default {
 					sunrise: data.city.sunrise,
 					sunset: data.city.sunset,
 				}
+
+				// console.log(data)
 
 				// удаляем класс анимации
 				this.animationLoadingData()
@@ -130,6 +142,11 @@ export default {
 			if (this.currentWeather.sunset && (new Date().getTime() / 1000).toFixed() > this.currentWeather.sunset) {
 				document.querySelector('html').dataset.theme = 'dark'
 			}
+		}
+	},
+	computed: {
+		computedCityList() {
+			return this.cityList.filter((item, idx) => this.cityList.indexOf(item) !== idx)
 		}
 	}
 };
